@@ -35,3 +35,37 @@ int main() {
     return 0;
 }
 ```
+
+# CRLF
+
+### In the example provided:
+
+```
+HTTP/1.1 200 OK\r\n
+Content-Type: text/html\r\n
+Content-Length: 23\r\n
+\r\n
+<html>\r\n
+<body>\r\n
+Hello, World!\r\n
+</body>\r\n
+</html>\r\n
+```
+
+The headers are:
+
+1. `HTTP/1.1 200 OK`
+2. `Content-Type: text/html`
+3. `Content-Length: 23`
+
+The body starts after the blank line (`\r\n\r\n`). So, the body in this example is:
+
+```
+<html>\r\n
+<body>\r\n
+Hello, World!\r\n
+</body>\r\n
+</html>\r\n
+```
+
+Headers and body are separated by the double `\r\n`, which indicates the end of the headers and the beginning of the body.
