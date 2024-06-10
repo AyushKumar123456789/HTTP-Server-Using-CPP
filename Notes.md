@@ -168,3 +168,122 @@ clean:
 1. Save the Makefile in the project directory.
 2. Run `make` command in the terminal to compile the project.
 3. Run `make clean` to remove generated files.
+
+# Thread & MultiThreading
+
+## Multithreading is a feature that allows concurrent or simultaneous execution of two or more parts of a program for maximum utilization of the CPU. Each part of such a program is called a thread. So, `Threads are lightweight processes within a process`.
+
+## C++ 11 Provide std::thread and define in <thread> .
+
+```cpp
+    std::thread thread_object (pointer of function);
+```
+
+- std::thread is the thread class that represents a single thread in C++. To start a thread we simply need to create a new thread object and pass the executing code to be called (i.e, a callable object) into the constructor of the object. Once the object is created a new thread is launched which will execute the code specified in callable. A callable can be `Pointer of function` and other things.
+
+### Examples :
+
+```cpp
+void foo(param)
+{
+  Statements;
+}
+// The parameters to the function are put after the comma
+std::thread thread_obj(foo, params);
+```
+
+### Every Thread object must go through detach and join if not lead to error.
+
+- ### Join
+
+  - It waits or hault the program until that thread on which join function is called will complete it execution and then goes to next thread or if there is no other thread goes to main function thread.
+
+  Example :
+
+```cpp
+
+    void foo(int Z)
+    {
+        for (int i = 0; i < Z; i++) {
+            cout << "Thread using function"
+                    " pointer as callable\n";
+        }
+        std::this_thread::sleep_for(chrono:seconds(5));
+    }
+
+
+    int main()
+    {
+        cout << "Threads 1 "
+                "operating independently"
+            << endl;
+
+        // This thread is launched by using
+        // function pointer as callable
+        thread th1(foo, 3);
+        th1.join();
+        return 0;
+    }
+
+```
+
+- ### Detach
+
+  - It is used to detach the newly created thread fromt the parent thread , Always check before detaching a thread that it is joinable otherwise we may end up double detaching and double detach willresult into program execution.
+
+```cpp
+
+    void foo(int Z)
+    {
+        for (int i = 0; i < Z; i++) {
+            cout << "Thread using function"
+                    " pointer as callable\n";
+        }
+        std::this_thread::sleep_for(chrono:seconds(5));
+    }
+
+
+    int main()
+    {
+        cout << "Threads 1 "
+                "operating independently"
+            << endl;
+
+        // This thread is launched by using
+        // function pointer as callable
+        thread th1(foo, 3);
+        if(th1.joinale())
+        {
+            th1.detach();
+        }
+        return 0;
+    }
+```
+
+- `To Compile Thread used code , you have to write `**g++ -c file_to_compiled.cpp -o Output_compiled_file.o -pthread** The -pthread flag in the g++ command is used to enable multithreading with the POSIX threads (pthreads) library in Linux.
+
+## How to check Concurrent Connection :
+
+To check if your server can handle concurrent connections, you need to perform a test that simulates multiple clients connecting to your server simultaneously. Here are a few methods to achieve this:
+
+:4221/`: The URL of your server.
+
+### 2. **Using `siege`**
+
+`Siege` is another powerful tool for load testing and benchmarking your server.
+
+First, install `siege`:
+
+- On Debian-based systems:
+  ```sh
+  sudo apt-get install siege
+  ```
+
+Then run a test:
+
+```sh
+siege -c 10 -r 10 http://localhost:4221/
+```
+
+- `-c 10`: Number of concurrent users.
+- `-r 10`: Number of repetitions for each user.

@@ -7,6 +7,43 @@
 #include <netdb.h>
 #include <string>
 #include "HttpRequestHandler.h"
+#include <thread>
+
+
+int HandleRequest(  struct sockaddr_in client_addr,socklen_t client_addr_len,int server_fd)
+{
+    int client_fd = accept(server_fd, (struct sockaddr *)&client_addr, &client_addr_len);
+        if (client_fd < 0) {
+            std::cerr << "error handling client connection\n";
+            close(server_fd); // Close server socket
+            return 1;
+        }
+        std::cout << "Client connected\n";
+
+        // Receive a message from the client
+        std::string client_message(1024, '\0'); // Allocate buffer for message
+        ssize_t brecvd = recv(client_fd, &client_message[0], client_message.size(), 0);
+        if (brecvd < 0) {
+            std::cerr << "error receiving message from client\n";
+            close(client_fd);   // Close client socket
+            close(server_fd);   // Close server socket
+            return 1;
+        }
+
+        // Handle the HTTP request using HttpRequestHandler
+        std::string response = HttpRequestHandler::handleRequest(client_message);
+
+        // Send the response to the client
+        ssize_t bsent = send(client_fd, response.c_str(), response.size(), 0);
+        if (bsent < 0) {
+            std::cerr << "error sending response to client\n";
+            close(client_fd);
+            close(server_fd);
+            return 1;
+        }
+        close(client_fd);
+        return 1;
+}
 
 int main(int argc, char **argv) {
     // Flush std::cout and std::cerr buffers after every output operation
@@ -16,7 +53,6 @@ int main(int argc, char **argv) {
     // Debugging statement, prints logs to console
     std::cout << "Logs from your program will appear here!\n";
 
-    while(1) {
         // Create a socket
         int server_fd = socket(AF_INET, SOCK_STREAM, 0);
         if (server_fd < 0) {
@@ -53,42 +89,16 @@ int main(int argc, char **argv) {
         // Define client address structure for accepting connections
         struct sockaddr_in client_addr;
         socklen_t client_addr_len = sizeof(client_addr);
-
+        
+    while(1) {
         std::cout << "Waiting for a client to connect...\n";
 
         // Accept a connection from a client
-        int client_fd = accept(server_fd, (struct sockaddr *)&client_addr, &client_addr_len);
-        if (client_fd < 0) {
-            std::cerr << "error handling client connection\n";
-            close(server_fd); // Close server socket
-            return 1;
-        }
-        std::cout << "Client connected\n";
+        std::thread th (HandleRequest,  client_addr,client_addr_len,server_fd);
+        th.join();
 
-        // Receive a message from the client
-        std::string client_message(1024, '\0'); // Allocate buffer for message
-        ssize_t brecvd = recv(client_fd, &client_message[0], client_message.size(), 0);
-        if (brecvd < 0) {
-            std::cerr << "error receiving message from client\n";
-            close(client_fd);   // Close client socket
-            close(server_fd);   // Close server socket
-            return 1;
-        }
-
-        // Handle the HTTP request using HttpRequestHandler
-        std::string response = HttpRequestHandler::handleRequest(client_message);
-
-        // Send the response to the client
-        ssize_t bsent = send(client_fd, response.c_str(), response.size(), 0);
-        if (bsent < 0) {
-            std::cerr << "error sending response to client\n";
-            close(client_fd);
-            close(server_fd);
-            return 1;
-        }
-        close(client_fd);
-        close(server_fd);
     }
+        close(server_fd);
 
     // Close the client and server sockets if needed
     return 0;
