@@ -287,3 +287,115 @@ siege -c 10 -r 10 http://localhost:4221/
 
 - `-c 10`: Number of concurrent users.
 - `-r 10`: Number of repetitions for each user.
+
+Certainly! Here's an explanation in simple language:
+
+---
+
+# Understanding `int argc, char **argv` in the `main` Function
+
+When you write a C or C++ program, the `main` function is the starting point. Sometimes, you want your program to accept inputs from the command line. This is where `int argc` and `char **argv` come into play.
+
+#### `int argc`
+
+- `argc` stands for **argument count**.
+- It tells you how many command-line arguments were passed to your program.
+- This number includes the program's name itself.
+
+For example:
+
+```bash
+./myprogram arg1 arg2
+```
+
+Here, `argc` would be 3 (`./myprogram`, `arg1`, `arg2`).
+
+#### `char **argv`
+
+- `argv` stands for **argument vector**.
+- It is an array of pointers to strings (character arrays).
+- Each element in this array is one of the command-line arguments.
+
+In the same example:
+
+```bash
+./myprogram arg1 arg2
+```
+
+- `argv[0]` would be `"./myprogram"`
+- `argv[1]` would be `"arg1"`
+- `argv[2]` would be `"arg2"`
+
+#### Putting It All Together
+
+Here's a simple example of using `argc` and `argv` in a program:
+
+```c
+#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+    printf("Number of arguments: %d\n", argc);
+    for(int i = 0; i < argc; i++) {
+        printf("Argument %d: %s\n", i, argv[i]);
+    }
+    return 0;
+}
+```
+
+If you run this program with:
+
+```bash
+./myprogram first second third
+```
+
+The output will be:
+
+```
+Number of arguments: 4
+Argument 0: ./myprogram
+Argument 1: first
+Argument 2: second
+Argument 3: third
+```
+
+#### Summary
+
+- `argc` gives the number of command-line arguments.
+- `argv` is an array containing the actual arguments as strings.
+- Use `argc` to know how many arguments there are.
+- Use `argv` to access each argument.
+
+---
+
+### Understanding Content-Type in HTTP Responses
+
+When a web server sends a response to a web browser, it includes various headers that provide information about the response. One important header is the `Content-Type`. This header tells the browser what kind of content it is receiving, so the browser knows how to display it correctly.
+
+#### Common Content-Types:
+
+1. **text/html**: HTML content. The browser will render this as a web page.
+2. **text/plain**: Plain text. The browser will display this as simple text.
+3. **application/json**: JSON data. The browser or a web application will process this as JSON.
+4. **image/jpeg**: JPEG image. The browser will display this as an image.
+5. **application/octet-stream**: Binary data. The browser will typically prompt to download this file.
+
+#### How to Use Content-Type in Your Server Code
+
+To ensure the browser handles the response correctly (e.g., displaying it instead of downloading it), you need to set the `Content-Type` header appropriately in your HTTP responses.
+
+Here’s how you can achieve this in a C++ HTTP server:
+
+1. **Include the `Content-Type` header in the response based on the type of content being served.**
+2. **Use different content types for different types of responses (HTML, plain text, binary files, etc.).**
+
+#### Example Code with Proper Content-Types
+
+Here’s your code, modified to set the correct `Content-Type` headers:
+
+### Summary
+
+- **Content-Type Header**: Informs the browser about the type of content in the response.
+- **Setting Content-Type**: Ensure the content is displayed correctly by setting the right `Content-Type` for HTML, plain text, JSON, images, etc.
+- **Example Code**: Shows how to set the `Content-Type` header for different types of responses in a C++ HTTP server.
+
+This explanation should be sufficient to understand and implement the proper use of `Content-Type` in HTTP responses.
