@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Web Server Using CPP
 
 ## Overview
@@ -154,3 +155,15 @@ Contributions are welcome! Please open an issue or submit a pull request.
 ---
 
 This README provides a comprehensive overview of the Simple HTTP Server project, including its features, structure, and usage instructions. Feel free to modify it to suit the specific details of your project.
+=======
+
+[HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) is the
+protocol that powers the web. In this challenge, you'll build a HTTP/1.1 server
+that is capable of serving multiple clients.
+
+Along the way you'll learn about TCP servers,
+[HTTP request syntax](https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html),
+and more.
+
+
+>>>>>>> ba263a13935e299cdeb90bb5296ef7329229b687
