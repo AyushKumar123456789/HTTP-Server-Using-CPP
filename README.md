@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Web Server Using CPP
 
 ## Overview
@@ -60,6 +59,12 @@ SimpleHTTPServer/
 
 - C++ compiler (e.g., `g++`)
 - `make` utility
+
+  - ### For Windows : Use [WSL(Windows Subsystem for Linux)](<https://code.visualstudio.com/learn/develop-cloud/wsl#:~:text=The%20Windows%20Subsystem%20for%20Linux%20(WSL)%20lets%20you%20run%20a,machine%20or%20dual%20boot%20setup.>)
+
+    The Windows Subsystem for Linux (WSL) lets you run a Linux environment, including command-line tools and applications, directly on Windows, without the overhead of a traditional virtual machine or dual boot setup.
+
+    WSL especially helps web developers and those working with Bash and Linux-first tools (for example, Ruby and Python) to use their tools on Windows and ensure consistency between development and production environments.
 
 ## How to Build and Run
 
@@ -144,18 +149,13 @@ Once the server is running, you can test it using a web browser or tools like `c
   curl -X PUT http://localhost:4221/
   ```
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request.
 
 ---
 
-This README provides a comprehensive overview of the Simple HTTP Server project, including its features, structure, and usage instructions. Feel free to modify it to suit the specific details of your project.
-=======
+# This README provides a comprehensive overview of the Simple HTTP Server project, including its features, structure, and usage instructions. Feel free to modify it to suit the specific details of your project.
 
 [HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) is the
 protocol that powers the web. In this challenge, you'll build a HTTP/1.1 server
@@ -164,6 +164,3 @@ that is capable of serving multiple clients.
 Along the way you'll learn about TCP servers,
 [HTTP request syntax](https://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html),
 and more.
-
-
->>>>>>> ba263a13935e299cdeb90bb5296ef7329229b687

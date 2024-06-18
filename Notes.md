@@ -82,7 +82,12 @@ int main() {
 
     return 0;
 }
+
 ```
+
+# TCP/IP
+
+# TCP Layers Concepts
 
 # CRLF/HTTP Formate
 
@@ -532,3 +537,32 @@ Here’s your code, modified to set the correct `Content-Type` headers:
 - **Example Code**: Shows how to set the `Content-Type` header for different types of responses in a C++ HTTP server.
 
 This explanation should be sufficient to understand and implement the proper use of `Content-Type` in HTTP responses.
+
+# HTTP Compression
+
+- Whenever Browser sends request to web server it also mention which encoding or compression machanism it accepts , in accept part of HTTP request Header section.
+  So, Basicaly it is a file compression mechanish used by web server to reduce the size of files they are serving for a request.
+- Types of encoding mechanism Gzip,deflate , hoffman encoding etc.
+- An HTTP client uses the Accept-Encoding header to specify the compression schemes it supports. In the following example, the client specifies that it supports the gzip compression scheme:
+
+```
+> GET /echo/foo HTTP/1.1
+> Host: localhost:4221
+> User-Agent: curl/7.81.0
+> Accept: */*
+> Accept-Encoding: gzip  // Client specifies it supports the gzip compression scheme.
+```
+
+The server then chooses one of the compression schemes listed in Accept-Encoding and compresses the response body with it.
+
+Then, the server sends a response with the compressed body and a Content-Encoding header. Content-Encoding specifies the compression scheme that was used.
+
+In the following example, the response body is compressed with gzip:
+
+```
+< HTTP/1.1 200 OK
+< Content-Encoding: gzip    // Server specifies that the response body is compressed with gzip.
+< Content-Type: text/plain  // Original media type of the body.
+< Content-Length: 23        // Size of the compressed body.
+< ...                       // Compressed body.
+```
