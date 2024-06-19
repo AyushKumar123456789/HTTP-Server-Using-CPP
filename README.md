@@ -57,8 +57,10 @@ SimpleHTTPServer/
 
 ## Requirements
 
+- Linux System or use WSL
 - C++ compiler (e.g., `g++`)
 - `make` utility
+- Install Zlib development package : `sudo apt-get install zlib1g-dev`
 
   - ### For Windows : Use [WSL(Windows Subsystem for Linux)](<https://code.visualstudio.com/learn/develop-cloud/wsl#:~:text=The%20Windows%20Subsystem%20for%20Linux%20(WSL)%20lets%20you%20run%20a,machine%20or%20dual%20boot%20setup.>)
 

@@ -1,7 +1,7 @@
 
 
 server: server.o HttpRequestHandler.o
-	g++ server.o HttpRequestHandler.o -o server -pthread
+	g++ server.o HttpRequestHandler.o -o server -pthread -lz
 
 server.o: server.cpp HttpRequestHandler.h
 	g++ -c server.cpp -o server.o
