@@ -33,11 +33,15 @@ Go and Put your index.html file in files folder and go to your browser and searc
 SimpleHTTPServer/
 ├── src/
 |   ├── Makefile
+|   ├── ResponseUtil.cpp
+|   ├── ResponseUtil.h
+|   ├── RequestUtil.cpp
+|   ├── RequestUtil.h
 │   ├── httprequesthandler.cpp
 │   ├── HttpRequestHandler.h
 │   └── server.cpp
 ├── files/
-│   └── [your files here]
+│   └── [your files here , text, html any file]
 └── README.md
 ```
 
@@ -75,6 +79,7 @@ SimpleHTTPServer/
    ```sh
    git clone https://github.com/AyushKumar123456789/HTTP-Server-Using-CPP.git
    cd HTTP-Server-Using-CPP
+   cd src
    ```
 
 2. **Build the Project**
@@ -157,7 +162,6 @@ Contributions are welcome! Please open an issue or submit a pull request.
 
 ---
 
-# This README provides a comprehensive overview of the Simple HTTP Server project, including its features, structure, and usage instructions. Feel free to modify it to suit the specific details of your project.
 
 [HTTP](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol) is the
 protocol that powers the web. In this challenge, you'll build a HTTP/1.1 server
