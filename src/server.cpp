@@ -13,6 +13,7 @@
 int HandleRequest(  struct sockaddr_in client_addr,socklen_t client_addr_len,int server_fd)
 {
     int client_fd = accept(server_fd, (struct sockaddr *)&client_addr, &client_addr_len);
+        // Accept is blocking system call
         if (client_fd < 0) {
             std::cerr << "error handling client connection\n";
             close(server_fd); // Close server socket
@@ -23,6 +24,7 @@ int HandleRequest(  struct sockaddr_in client_addr,socklen_t client_addr_len,int
         // Receive a message from the client
         std::string client_message(1024, '\0'); // Allocate buffer for message
         ssize_t brecvd = recv(client_fd, &client_message[0], client_message.size(), 0);
+        // Recv is blocking system call
         if (brecvd < 0) {
             std::cerr << "error receiving message from client\n";
             close(client_fd);   // Close client socket
